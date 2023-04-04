@@ -13,14 +13,15 @@ public class Model {
 		this.studenteDAO = new StudenteDAO();   }
 
 	public List<Corso> getCorsi() {
-	List<Corso> listaCorsi = corsoDAO.getTuttiICorsi();
-	return listaCorsi;  }
+		return corsoDAO.getTuttiICorsi();  }
 	
 	public List<Studente> getStudenti() {
-		List<Studente> listaStudenti = studenteDAO.getTuttiGliStudenti();
-		return listaStudenti;  }
+		return studenteDAO.getTuttiGliStudenti();  }
 	
 	public List<Studente> getStudentiPerCorso(Corso corso) {
 		return corsoDAO.getStudentiIscrittiAlCorso(corso);  }
+	
+	public List<Corso> getCorsiDegliStudenti(int matricola) {
+		return studenteDAO.getCorsiFromStudente(matricola);  }
 	
 }

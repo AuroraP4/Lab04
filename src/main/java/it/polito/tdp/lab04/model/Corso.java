@@ -7,50 +7,39 @@ public class Corso {
 	private String nome;
 	private int pd;
 	
-	
 	public Corso(String codins, int crediti, String nome, int pd) {
-		super();
 		this.codins = codins;
 		this.crediti = crediti;
 		this.nome = nome;
-		this.pd = pd;
-	}
+		this.pd = pd;  }
 
 	public String getCodins() {
-		return codins;
-	}
+		return codins; }
 
 	public void setCodins(String codins) {
-		this.codins = codins;
-	}
+		this.codins = codins; }
 
 	public int getCrediti() {
-		return crediti;
-	}
+		return crediti; }
 
 	public void setCrediti(int crediti) {
-		this.crediti = crediti;
-	}
+		this.crediti = crediti; }
 
 	public String getNome() {
-		return nome;
-	}
+		return nome; }
 
 	public void setNome(String nome) {
-		this.nome = nome;
-	}
+		this.nome = nome; }
 
 	public int getPd() {
-		return pd;
-	}
+		return pd; }
 
 	public void setPd(int pd) {
-		this.pd = pd;
-	}
+		this.pd = pd; }
 
-	@Override
 	public String toString() {
-		return "" + nome;
-	}
+		return "" + nome; }
 	
+	public String toStringCorsiDelloStudente() {
+		return "Il corso " + nome.toUpperCase() + " con il codice " + codins + " da "+ crediti + " crediti nel periodo " + pd; }
 }

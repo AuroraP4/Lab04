@@ -56,8 +56,32 @@ public class FXMLController {
 
     @FXML
     void doCercaCorsi(ActionEvent event) {
-
+    	this.areaDiTesto.clear(); 
+    	boolean flag = false;
+    	String mat = tfMatricolaStudente.getText();
+    	
+    	if(mat.equals("")) {
+    		this.areaDiTesto.setText("Inserire una matricola!"); 
+    		return; }
+    	if(!mat.matches("\\d*")) {
+    		this.areaDiTesto.setText("La matricola è composta di soli numeri!"); 
+    		return; }
+    	
+    	int matricola = Integer. parseInt(mat);
+    	for(Studente s: model.getStudenti()) {
+    		if(s.getMatricola()==matricola) {
+    			flag = true;}  }
+    	
+    	if(flag == false) {
+    		this.areaDiTesto.setText("ERRORE! Questa matricola non è registrata nel database!");   }
+   
+    	List<Corso> corsi = model.getCorsiDegliStudenti(matricola);
+    	
+    	for(Corso c: corsi) {
+    		this.areaDiTesto.appendText(c.toStringCorsiDelloStudente() + "\n");   }
     }
+    	
+    
 
     @FXML
     void doCercaIscrittiCorso(ActionEvent event) {
@@ -72,8 +96,7 @@ public class FXMLController {
     	List <Studente> studenti = model.getStudentiPerCorso(corsoDaTendina);
    
     	for(Studente st: studenti) {
-    		this.areaDiTesto.appendText(st.toString() + "\n");
-   }
+    		this.areaDiTesto.appendText(st.toString() + "\n");   }
     }
 
     @FXML
@@ -101,7 +124,7 @@ public class FXMLController {
     			flag = true;}  }
     	
     	if(flag == false) {
-    		this.areaDiTesto.setText("Questa matricola non è registrata nel database!");   }
+    		this.areaDiTesto.setText("ERRORE! Questa matricola non è registrata nel database!");   }
     }
 
     @FXML
