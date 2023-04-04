@@ -4,17 +4,14 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 import it.polito.tdp.lab04.model.Corso;
 import it.polito.tdp.lab04.model.Studente;
 
 public class CorsoDAO {
 	
-	/*
-	 * Ottengo tutti i corsi salvati nel Db
-	 */
+	//TUTTI I CORSI DEL DB
 	public List<Corso> getTuttiICorsi() {
 
 		final String sql = "SELECT * FROM corso";
@@ -22,10 +19,10 @@ public class CorsoDAO {
 		List<Corso> corsi = new LinkedList<Corso>();
 
 		try {
-			Connection conn = ConnectDB.getConnection();
-			PreparedStatement st = conn.prepareStatement(sql);
+			Connection conn = ConnectDB.getConnection();  //stabilisce la connessione
+			PreparedStatement st = conn.prepareStatement(sql); //prepara la query
 
-			ResultSet rs = st.executeQuery();
+			ResultSet rs = st.executeQuery(); //esegue la query
 
 			while (rs.next()) {
 
@@ -33,15 +30,17 @@ public class CorsoDAO {
 				int numeroCrediti = rs.getInt("crediti");
 				String nome = rs.getString("nome");
 				int periodoDidattico = rs.getInt("pd");
+				
+				Corso c = new Corso(codins, numeroCrediti, nome, periodoDidattico);
+				corsi.add(c);
 
 				System.out.println(codins + " " + numeroCrediti + " " + nome + " " + periodoDidattico);
 
-				// Crea un nuovo JAVA Bean Corso
-				// Aggiungi il nuovo oggetto Corso alla lista corsi
 			}
 
 			conn.close();
-			
+			st.close();
+			rs.close();
 			return corsi;
 			
 
@@ -51,19 +50,35 @@ public class CorsoDAO {
 		}
 	}
 	
-	
-	/*
-	 * Dato un codice insegnamento, ottengo il corso
-	 */
-	public void getCorso(Corso corso) {
-		// TODO
-	}
 
-	/*
-	 * Ottengo tutti gli studenti iscritti al Corso
-	 */
-	public void getStudentiIscrittiAlCorso(Corso corso) {
-		// TODO
+	//TUTTI GLI STUDENTI ISCRITTI AL CORSO
+	public List<Studente> getStudentiIscrittiAlCorso(Corso corso) {
+		
+		final String sql = "SELECT * FROM iscrizione, studente WHERE iscrizione.matricola=studente.matricola AND codins=?";
+
+		List<Studente> studentiIscrittiAlCorso = new ArrayList<Studente>();
+
+		try {
+			Connection conn = ConnectDB.getConnection();
+			PreparedStatement st = conn.prepareStatement(sql);
+			st.setString(1, corso.getCodins());
+
+			ResultSet rs = st.executeQuery();
+
+			while (rs.next()) {
+
+				Studente s = new Studente(rs.getInt("matricola"), rs.getString("nome"), rs.getString("cognome"), rs.getString("cds"));
+				studentiIscrittiAlCorso.add(s);
+			}
+
+			conn.close();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new RuntimeException("Errore Db", e);
+		}
+		
+		return studentiIscrittiAlCorso;
 	}
 
 	/*

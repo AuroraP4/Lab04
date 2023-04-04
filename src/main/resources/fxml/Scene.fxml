@@ -1,16 +1,111 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polito.tdp.lab04.FXMLController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polito.tdp.lab04.FXMLController">
    <top>
       <Label text="Lab4_Segreteria_Studenti" BorderPane.alignment="CENTER">
          <BorderPane.margin>
             <Insets top="20.0" />
          </BorderPane.margin>
+         <font>
+            <Font size="15.0" />
+         </font>
       </Label>
    </top>
+   <center>
+      <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+         <children>
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Label text="Corso:">
+                     <HBox.margin>
+                        <Insets left="15.0" top="9.0" />
+                     </HBox.margin>
+                  </Label>
+                  <ComboBox fx:id="cbCorsi" prefWidth="150.0">
+                     <HBox.margin>
+                        <Insets left="10.0" top="6.0" />
+                     </HBox.margin>
+                  </ComboBox>
+               </children>
+               <VBox.margin>
+                  <Insets top="9.0" />
+               </VBox.margin>
+            </HBox>
+            <Button fx:id="bCercaIscrittiCorso" mnemonicParsing="false" onAction="#doCercaIscrittiCorso" text="Cerca iscritti corso">
+               <VBox.margin>
+                  <Insets bottom="3.0" left="15.0" />
+               </VBox.margin>
+            </Button>
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Label text="Studente:">
+                     <HBox.margin>
+                        <Insets left="15.0" right="5.0" top="11.0" />
+                     </HBox.margin>
+                  </Label>
+                  <TextField fx:id="tfMatricolaStudente" prefHeight="25.0" prefWidth="96.0">
+                     <HBox.margin>
+                        <Insets top="7.0" />
+                     </HBox.margin>
+                  </TextField>
+                  <Button fx:id="bErgo" mnemonicParsing="false" onAction="#doErgo" text="Ergo" textAlignment="CENTER">
+                     <HBox.margin>
+                        <Insets left="5.0" top="7.0" />
+                     </HBox.margin>
+                  </Button>
+                  <TextField fx:id="tfNomeStudente" editable="false">
+                     <HBox.margin>
+                        <Insets left="5.0" top="7.0" />
+                     </HBox.margin>
+                  </TextField>
+                  <TextField fx:id="tfCognomeStudente" editable="false">
+                     <HBox.margin>
+                        <Insets left="5.0" top="7.0" />
+                     </HBox.margin>
+                  </TextField>
+               </children>
+            </HBox>
+            <HBox prefHeight="100.0" prefWidth="600.0">
+               <children>
+                  <Button fx:id="bCercaCorsi" mnemonicParsing="false" onAction="#doCercaCorsi" text="Cerca corsi">
+                     <HBox.margin>
+                        <Insets left="15.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Button fx:id="bIscrivi" mnemonicParsing="false" onAction="#doIscrivi" text="Iscrivi">
+                     <HBox.margin>
+                        <Insets left="430.0" />
+                     </HBox.margin>
+                  </Button>
+               </children>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+            </HBox>
+            <TextArea fx:id="areaDiTesto" editable="false" prefHeight="200.0" prefWidth="200.0">
+               <VBox.margin>
+                  <Insets left="15.0" right="15.0" />
+               </VBox.margin>
+            </TextArea>
+         </children>
+      </VBox>
+   </center>
+   <bottom>
+      <Button fx:id="bReset" mnemonicParsing="false" onAction="#doReset" text="Reset" BorderPane.alignment="CENTER">
+         <BorderPane.margin>
+            <Insets bottom="10.0" left="499.0" top="7.0" />
+         </BorderPane.margin>
+      </Button>
+   </bottom>
 </BorderPane>
