@@ -24,4 +24,11 @@ public class Model {
 	public List<Corso> getCorsiDegliStudenti(int matricola) {
 		return studenteDAO.getCorsiFromStudente(matricola);  }
 	
+	public boolean isStudenteIscrittoACorso(int matricola, Corso corso) {
+		return studenteDAO.isStudenteIscrittoACorso(matricola,corso);
+	}
+	
+	public boolean inscriviStudenteACorso(int matricola, Corso corso) {
+		return corsoDAO.inscriviStudenteACorso(matricola, corso);
+	}
 }

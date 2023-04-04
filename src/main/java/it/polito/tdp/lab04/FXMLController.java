@@ -129,7 +129,41 @@ public class FXMLController {
 
     @FXML
     void doIscrivi(ActionEvent event) {
+    	this.areaDiTesto.clear();
 
+    	boolean flag = false;
+    	String mat = tfMatricolaStudente.getText();
+    	
+    	if(mat.equals("")) {
+    		this.areaDiTesto.setText("Inserire una matricola!"); 
+    		return; }
+    	if(!mat.matches("\\d*")) {
+    		this.areaDiTesto.setText("La matricola è composta di soli numeri!"); 
+    		return; }
+    	
+    	int matricola = Integer. parseInt(mat);
+    	for(Studente s: model.getStudenti()) {
+    		if(s.getMatricola()==matricola) {
+    			flag = true;}  }
+    	
+    	Corso corsoDaTendina = this.cbCorsi.getValue();
+    	
+    	if(corsoDaTendina == null) {
+    		this.areaDiTesto.setText("Scegliere un corso al menù a tendina!"); 
+    		return; }
+    	
+    	if(flag == false) {
+    		this.areaDiTesto.setText("ERRORE! Questa matricola non è registrata nel database!");   }
+   
+    	if (model.isStudenteIscrittoACorso(matricola, corsoDaTendina)) {
+			this.areaDiTesto.appendText("Studente già iscritto a questo corso!");
+			return;	}
+
+    	if (!model.inscriviStudenteACorso(matricola, corsoDaTendina)) {
+			this.areaDiTesto.appendText("Errore durante l'iscrizione al corso");
+			return;  } 
+    	else {
+			this.areaDiTesto.appendText("Studente iscritto al corso!"); }
     }
 
     @FXML
